@@ -1,1 +1,1 @@
-"# Computer-Graphics-Multimedia-Lab-Project" 
+Computer-Graphics-Multimedia-Lab-Project
