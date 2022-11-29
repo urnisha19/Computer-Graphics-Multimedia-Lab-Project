@@ -3,24 +3,27 @@
 #include<cmath>
 float p=-10.0;
 
-
+//function for line drawing
 void drawLine(float x1, float y1, float x2, float y2)
 {
-    glBegin(GL_LINES);
+    glBegin(GL_LINES); //GL_lines for line draw
     glVertex2f(x1,y1);
     glVertex2f(x2,y2);
     glEnd();
 }
+
+
+//function for circle drawing
 void makeCircle(float r, float x_center, float y_center)
 {
     int deg = 0;
     float theta, x, y;
     glPointSize(4);
-    glBegin(GL_POLYGON);
+
+    glBegin(GL_POLYGON); //gl begin takes 10 specific argument, where there is no direct build in function for circle so we will draw the circle with polygon argument.
 
     while(deg < 360)
     {
-
         theta = (deg * M_PI) / 180;
         x = x_center + r*cos(theta);
         y = y_center + r*sin(theta);
@@ -30,55 +33,50 @@ void makeCircle(float r, float x_center, float y_center)
     glEnd();
 }
 
+
+// for  the people symbol in front of temple
 void stickman(float X2, float Y2)
 {
+    makeCircle(1,X2,Y2); //people head, here radius 1.
 
-    makeCircle(1,X2,Y2);
-    drawLine(X2,-1+Y2,X2,-4+Y2);
-    drawLine(-2.5+X2,-1.5+Y2,2.5+X2,-1.5+Y2);
-    drawLine(X2,-4+Y2,-2+X2,-6+Y2);
-    drawLine(X2,-4+Y2,2+X2,-6+Y2);
+    drawLine(X2,-1+Y2,X2,-4+Y2); // vertical line for body. X same Y  Change
+    drawLine(-2.5+X2,-1.5+Y2,2.5+X2,-1.5+Y2); //horizontal line for hands. X change Y same
+    drawLine(X2,-4+Y2,-2+X2,-6+Y2); //left leg
+    drawLine(X2,-4+Y2,2+X2,-6+Y2); //right leg
 
 }
 
+
+//temple er samne je quads gulo acche
 void shops(float x3,float y3)
 {
     glBegin(GL_QUADS);
-    glColor3f(1,1,1);
+    glColor3f(0,1,1); //cyan color
     glVertex2f(x3,y3);
     glVertex2f(x3+5,y3);
     glVertex2f(x3+3,y3-2);
     glVertex2f(x3-2,y3-2);
     glEnd();
-
 }
 
-
-
+//initializing viewing region
 void init(void)
 {
-    glClearColor(0.8, 1.0, 1.0, 0.0);
-
-    glMatrixMode(GL_PROJECTION);
-    gluOrtho2D(0.0, 100.0, 0.0, 80.0);
+    glClearColor(0.8, 1.0, 1.0, 0.0); //sets the clear color
+    glMatrixMode(GL_PROJECTION); //applies subsequent matrix operation to the model view matrix
+    gluOrtho2D(0.0, 100.0, 0.0, 80.0); //Set up a 2D orthographic viewing region. that is graph
 }
 
+//whole view drawing
 void drawShapes(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-
-
+    glClear(GL_COLOR_BUFFER_BIT); //Clears the buffer that is currently enabled for color writing.
     glColor3f(0.0, 0.0, 0.0);
 
     glPointSize(5.0);
-
-
-
     glColor3f(1.0, 0.0, 0.0);
 
-
-
-    //DIvidation
+    //temple er piche je background ache..sky
     glBegin(GL_QUADS);
     glColor3f(0.8, 1.0,1.0);
     glVertex2f(0.0,37.0);
@@ -86,6 +84,7 @@ void drawShapes(void)
     glVertex2f(100.0,80.0);
     glVertex2f(100.0,37.0);
 
+    //temple er smane je ash color floor ache
     glBegin(GL_QUADS);
     glColor3f(0.5,0.5,0.5);
     glVertex2f(0.0,37.0);
@@ -94,8 +93,7 @@ void drawShapes(void)
     glVertex2f(0.0,0.0);
     glEnd();
 
-    //Melaaa
-
+    //temple er samne fllor e je tiles gulo ache
     shops(-2,4);
     shops(8,4);
     shops(18,4);
@@ -108,9 +106,6 @@ void drawShapes(void)
     shops(88,4);
     shops(98,4);
 
-
-
-
     shops(2,8);
     shops(12,8);
     shops(22,8);
@@ -121,7 +116,6 @@ void drawShapes(void)
     shops(72,8);
     shops(82,8);
     shops(92,8);
-
 
     shops(-4,12);
     shops(6,12);
@@ -135,7 +129,6 @@ void drawShapes(void)
     shops(86,12);
     shops(96,12);
 
-
     shops(0,16);
     shops(10,16);
     shops(20,16);
@@ -147,7 +140,6 @@ void drawShapes(void)
     shops(80,16);
     shops(90,16);
     shops(100,16);
-
 
     shops(-6,20);
     shops(4,20);
@@ -163,67 +155,9 @@ void drawShapes(void)
     shops(104,20);
 
 
-    shops(-12,24);
-    shops(-2,24);
-    shops(8,24);
-    shops(18,24);
-    shops(28,24);
-    shops(38,24);
-    shops(48,24);
-    shops(58,24);
-    shops(68,24);
-    shops(78,24);
-    shops(88,24);
-    shops(95,24);
-    shops(108,24);
-
-    shops(-8,28);
-    shops(2,28);
-    shops(12,28);
-    shops(22,28);
-    shops(32,28);
-    shops(42,28);
-    shops(52,28);
-    shops(62,28);
-    shops(72,28);
-    shops(82,28);
-    shops(92,28);
-    shops(102,28);
-    shops(108,28);
-
-    shops(6,32);
-    shops(16,32);
-    shops(26,32);
-    shops(36,32);
-    shops(46,32);
-    shops(56,32);
-    shops(66,32);
-    shops(76,32);
-    shops(86,32);
-    shops(96,32);
-    shops(106,32);
-    shops(112,32);
-
-    shops(10,36);
-    shops(20,36);
-    shops(30,36);
-    shops(40,36);
-    shops(50,36);
-    shops(60,36);
-    shops(70,36);
-    shops(80,36);
-    shops(90,36);
-    shops(100,36);
-
-
-
-
-
-//Main Temple Shape
+    //Main Temple Shape
     glBegin(GL_POLYGON);
-
     glColor3f(1.0,0.6,0);
-
 
     glVertex2f(30.0,29.0);
     glVertex2f(30.0,45.0);
@@ -252,14 +186,12 @@ void drawShapes(void)
     glVertex2f(25.0,25.0);
     glVertex2f(29.0,27.0);
 
-
-
-
     glEnd();
-    //Designing Temple
 
-    glLineWidth(1.5);
+    //Designing Temple. Red Lines
+    glLineWidth(3.5);
     glColor3f(1.0,0.0,0.0);
+
     drawLine(25.0,25.0,59.0,25.0);
     drawLine(59.0,25.0,59.0,23.0);
     drawLine(59.0,25.0,69.7,35.7);
@@ -312,7 +244,7 @@ void drawShapes(void)
     drawLine(44,59,45,59);
 
 
-    //Doors of temple
+    //Doors of temple. 4ta
     glBegin(GL_POLYGON);
     glColor3f(0,0,0);
     glVertex2f(37,30);
@@ -350,8 +282,7 @@ void drawShapes(void)
     glEnd();
 
 
-//windows of temple
-
+    //windows of temple. 2ta
     glBegin(GL_QUADS);
     glColor3f(0,0,0);
     glVertex2f(38,57);
@@ -369,43 +300,34 @@ void drawShapes(void)
     glEnd();
 
 
-
-
-
-    //Shops on left
+    //Samne left side e je colored area ache
     glBegin(GL_POLYGON);
-    glColor3f(1.0,0.0,1.0);
+    glColor3f(1.0,0.0,1.0); //megenta
     glVertex2f(0.0,10.0);
     glVertex2f(7.0,20.0);
     glVertex2f(14.0,20.0);
     glVertex2f(1.0,0.0);
-
     glVertex2f(0.0,0.0);
-
     glEnd();
-    glBegin(GL_POLYGON);
-    glColor3f(0.0,0.0,1.0);
 
+    glBegin(GL_POLYGON);
+    glColor3f(0.0,0.0,1.0);//blue
     glVertex2f(14.0,20.0);
     glVertex2f(14.0,15.0);
     glVertex2f(5.0,0.0);
     glVertex2f(0.0,0.0);
-
-
     glEnd();
-    glBegin(GL_POLYGON);
-    glColor3f(0.0,0.5,1.0);
 
+    glBegin(GL_POLYGON);
+    glColor3f(0.0,0.0,0.0); //black
     glVertex2f(14.0,17.0);
     glVertex2f(14.0,15.0);
     glVertex2f(5.0,0.0);
     glVertex2f(4.0,0.0);
-
-
     glEnd();
 
 
-//Ride On Right
+    //Ride On Right
     glBegin(GL_TRIANGLES);
     glColor3f(1.0,0.,.0);
     glVertex2f(85.0,8.0);
@@ -447,19 +369,16 @@ void drawShapes(void)
 
     glLineWidth(5.0);
     glBegin(GL_LINES);
-
     glColor3f(.0,0.0,0.0);
     glVertex2f(84.0,15.0);
     glVertex2f(92.0,24.0);
-
     glVertex2f(83.0,23.0);
     glVertex2f(92.0,16.0);
     glEnd();
 
     //Wall of both Sides
-    glBegin(GL_POLYGON);
-    glColor3f(1.0,1.0,0.0);
-
+    glBegin(GL_POLYGON); //left side wall
+    glColor3f(1.0,1.0,0.0); //yellow
     glVertex2f(0.0,37.0);
     glVertex2f(15.0,38.0);
     glVertex2f(29.45,38.0);
@@ -468,9 +387,8 @@ void drawShapes(void)
     glVertex2f(0.0,30.0);
     glEnd();
 
-    glBegin(GL_POLYGON);
-    glColor3f(1.0,1.0,0.0);
-
+    glBegin(GL_POLYGON); //right side wall
+    glColor3f(1.0,1.0,0.0); //yellow
     glVertex2f(68.0,39.0);
     glVertex2f(85.0,39.0);
     glVertex2f(100.0,37.0);
@@ -479,26 +397,20 @@ void drawShapes(void)
     glVertex2f(70.0,35.0);
     glVertex2f(70.0,36.0);
     glVertex2f(68.0,37.0);
-
-
     glEnd();
 
     //SUN
-    glColor3f(1.0,0.0,0.0);
-    makeCircle(3.0,85.0,65.0);
+    glColor3f(1.0,0.0,0.0); //red
+    makeCircle(3.0,85.0,65.0); //radius, x_center ,y_center
 
 
-
-//plane
-
-    if(p<=95) //moving limit with the display measurement
+    //plane
+    if(p<=95) //moving limit with the display measurement. Translation
         p=p+.04; // changing the object position for redisplaying
-
     else
         p=-60; // For backing the object continuously
 
-    glutPostRedisplay();
-
+    glutPostRedisplay(); //marks the current window as needing to be redisplayed after iteration
     glColor3f(0.7,0.7,0.0);
     glBegin(GL_QUADS);
     glVertex2f(70-p,70);
@@ -506,12 +418,14 @@ void drawShapes(void)
     glVertex2f(85-p,65);
     glVertex2f(70-p,65);
     glEnd();
+
     glBegin(GL_QUADS);
     glVertex2f(85-p,70);
     glVertex2f(90-p,75);
     glVertex2f(93-p,75);
     glVertex2f(85-p,65);
     glEnd();
+
     glColor3f(0.7,0.0,1.0);
     glBegin(GL_TRIANGLES);
     glVertex2f(65-p,66);
@@ -532,30 +446,23 @@ void drawShapes(void)
     glVertex2f(81-p,62);
     glVertex2f(79-p,62);
     glEnd();
-//Flag
 
+
+    //Flag above the temple
     glBegin(GL_QUADS);
     glColor3f(1.0,0.0,0.5);
-
     glVertex2f(50.0,64.0);
     glVertex2f(52.0,64.0);
     glVertex2f(52.0,63.0);
     glVertex2f(50.0,63.0);
     glEnd();
 
-
     glColor3f(1.0,0.0,0.5);
     glLineWidth(2.0);
-
     drawLine(50,61,50,64);
 
-
-
-
-
-
-    //Stick Human
-    glColor3f(1,0.2,.5);
+    //Stick Humans
+    glColor3f(1,0.5,.5);
     stickman(60,20);
     stickman(36,15);
     stickman(42,17);
@@ -579,10 +486,6 @@ void drawShapes(void)
     stickman(83,6);
     stickman(95,7);
 
-
-
-
-
     //tree1
     glColor3f(1.0,0.3,0.0);
     glBegin(GL_QUADS);
@@ -598,6 +501,7 @@ void drawShapes(void)
     glVertex2f(17.5,35);
     glVertex2f(16,35);
     glEnd();
+
     glColor3f(0.0,0.3,0.0);
     makeCircle(2,15,46);
     makeCircle(2,15,43);
@@ -606,7 +510,8 @@ void drawShapes(void)
     makeCircle(2,19,48);
     makeCircle(2,19,45);
     makeCircle(2,18,44);
-//tree2
+
+    //tree2
     glBegin(GL_QUADS);
     glColor3f(1.0,0.3,0.0);
     glVertex2f(75,25);
@@ -621,6 +526,7 @@ void drawShapes(void)
     glVertex2f(77.5,35);
     glVertex2f(76,35);
     glEnd();
+
     glColor3f(0.0,0.9,0.0);
     makeCircle(2,75,46);
     makeCircle(2,75,43);
@@ -629,8 +535,8 @@ void drawShapes(void)
     makeCircle(2,79,48);
     makeCircle(2,79,45);
     makeCircle(2,78,44);
-//tree3
 
+    //tree3
     glBegin(GL_QUADS);
     glColor3f(1.0,0.3,0.0);
     glVertex2f(85,25);
@@ -645,6 +551,7 @@ void drawShapes(void)
     glVertex2f(87.5,35);
     glVertex2f(86,35);
     glEnd();
+
     glColor3f(0.0,0.5,0.0);
     makeCircle(2,85,46);
     makeCircle(2,85,43);
@@ -654,21 +561,23 @@ void drawShapes(void)
     makeCircle(2,89,45);
     makeCircle(2,88,44);
 
-    glFlush();
+    glFlush(); // force execution of GL commands in finite time
 }
 
+//Main function
 int main(int argc, char* argv[])
 {
-    glutInit(&argc, argv);						// Initalise GLUT
-    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);	// Set display mode
+    glutInit(&argc, argv); // Initialize GLUT Library
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);	//Set display & color mode
 
-    glutInitWindowPosition(50, 100);				// Set window position
-    glutInitWindowSize(1100,800);					// Set window size
-    glutCreateWindow("Drawing of Kantajew Temple");	// Create display window
+    glutInitWindowPosition(50, 100); // Set window position
+    glutInitWindowSize(1100,800);// Set window size
 
-    init();							// Execute initialisation procedure
-    glutDisplayFunc(drawShapes);		// Send graphics to display window
-    glutMainLoop();					// Display everything and wait
+    glutCreateWindow("Drawing of Temple and Plane view");//Create display window
+
+    init();
+    glutDisplayFunc(drawShapes);
+    glutMainLoop();//Display everything and wait
 
     return 0;
 }
